@@ -39,40 +39,6 @@ class EasterEggSystem {
         // Add hint in page source
         document.documentElement.setAttribute('data-secret', 'The cake is a lie');
         document.documentElement.setAttribute('data-hint', 'Up Up Down Down Left Right Left Right B A');
-
-        // Handle URL-based easter eggs
-        window.addEventListener('popstate', () => this.handleURLEasterEggs());
-        this.handleURLEasterEggs();
-    }
-
-    handleURLEasterEggs() {
-        // Reset any previous effects
-        document.body.className = '';
-        document.documentElement.style.filter = '';
-
-        const path = window.location.pathname.toLowerCase();
-        switch (path) {
-            case '/invert':
-                document.documentElement.style.filter = 'invert(1)';
-                this.showDiscoveryAnimation('Colors inverted! 🔄');
-                break;
-            case '/matrix':
-                document.body.classList.add('matrix-mode');
-                this.showDiscoveryAnimation('Matrix mode activated! 🐰');
-                break;
-            case '/retro':
-                document.body.classList.add('retro-mode');
-                this.showDiscoveryAnimation('Retro mode enabled! 👾');
-                break;
-            case '/rainbow':
-                document.body.classList.add('rainbow-mode');
-                this.showDiscoveryAnimation('Rainbow mode activated! 🌈');
-                break;
-            case '/party':
-                window.startPartyMode();
-                this.showDiscoveryAnimation('Party mode activated! 🎉');
-                break;
-        }
     }
 
     initConsoleEasterEggs() {
@@ -92,7 +58,65 @@ class EasterEggSystem {
             }
         };
 
-        // New secret console commands
+        // Theme toggle commands
+        window.matrix = () => {
+            const isMatrixMode = document.body.classList.contains('matrix-mode');
+            if (isMatrixMode) {
+                document.body.classList.remove('matrix-mode');
+                console.log('%cMatrix mode deactivated', 'color: #00ff00; font-family: monospace;');
+            } else {
+                document.body.classList.add('matrix-mode');
+                this.showDiscoveryAnimation('Matrix mode activated! 🐰');
+                console.log('%cThe white rabbit beckons... followTheRabbit()', 'color: #00ff00; font-family: monospace;');
+            }
+        };
+
+        window.retro = () => {
+            const isRetroMode = document.body.classList.contains('retro-mode');
+            if (isRetroMode) {
+                document.body.classList.remove('retro-mode');
+                console.log('%cRetro mode deactivated', 'color: #00ff00; font-family: monospace;');
+            } else {
+                document.body.classList.add('retro-mode');
+                this.showDiscoveryAnimation('Retro mode enabled! 👾');
+            }
+        };
+
+        window.rainbow = () => {
+            const isRainbowMode = document.body.classList.contains('rainbow-mode');
+            if (isRainbowMode) {
+                document.body.classList.remove('rainbow-mode');
+                console.log('%cRainbow mode deactivated', 'color: #ff00ff; font-family: monospace;');
+            } else {
+                document.body.classList.add('rainbow-mode');
+                this.showDiscoveryAnimation('Rainbow mode activated! 🌈');
+            }
+        };
+
+        window.party = () => {
+            const isPartyMode = document.body.classList.contains('party-mode');
+            if (isPartyMode) {
+                document.body.classList.remove('party-mode');
+                console.log('%cParty mode deactivated', 'color: #ff00ff; font-family: monospace;');
+            } else {
+                document.body.classList.add('party-mode');
+                this.showDiscoveryAnimation('Party mode activated! 🎉');
+                console.log('%cTime to seekTheTruth()', 'color: #ff00ff; font-family: monospace;');
+            }
+        };
+
+        window.invert = () => {
+            const isInverted = document.documentElement.style.filter === 'invert(1)';
+            if (isInverted) {
+                document.documentElement.style.filter = '';
+                console.log('%cInvert mode deactivated', 'color: #ffffff; font-family: monospace;');
+            } else {
+                document.documentElement.style.filter = 'invert(1)';
+                this.showDiscoveryAnimation('Colors inverted! 🔄');
+            }
+        };
+
+        // Secret console commands
         window.enterTheVoid = () => {
             window.location.href = '/secrets/terminal.html';
         };
