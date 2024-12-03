@@ -1,0 +1,87 @@
+---
+layout: default
+title: Secret Page
+---
+
+<div class="secret-page">
+    <div class="container">
+        <h1 class="text-center mb-4">🎉 Congratulations!</h1>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">You've Found the Secret Page</h2>
+                <p class="card-text">
+                    Well done on discovering this hidden content! You must be quite curious and resourceful.
+                </p>
+                <div class="secret-content">
+                    <p>A message appears before you:</p>
+                    <pre class="ascii-art">
+    ██████╗  ██████╗ ██╗   ██╗██╗  ██╗██████╗ ███╗   ██╗██╗    ██╗
+    ██╔══██╗██╔════╝ ██║   ██║╚██╗██╔╝██╔══██╗████╗  ██║██║    ██║
+    ██████╔╝██║  ███╗██║   ██║ ╚███╔╝ ██║  ██║██╔██╗ ██║██║ █╗ ██║
+    ██╔══██╗██║   ██║╚██╗ ██╔╝ ██╔██╗ ██║  ██║██║╚██╗██║██║███╗██║
+    ██║  ██║╚██████╔╝ ╚████╔╝ ██╔╝ ██╗██████╔╝██║ ╚████║╚███╔███╔╝
+    ╚═╝  ╚═╝ ╚═════╝   ╚═══╝  ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═══╝ ╚══╝╚══╝ 
+    </pre>
+                    <p class="mt-4">
+                        Sometimes the most interesting discoveries come from exploring the unexpected paths.
+                        Keep being curious! There might be more secrets to uncover...
+                    </p>
+                    <div class="hints">
+                        <p>Have you tried:</p>
+                        <ul>
+                            <li>Opening the developer console?</li>
+                            <li>Looking for hidden commands?</li>
+                            <li>Entering the void?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.secret-page {
+    padding: 2rem;
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.ascii-art {
+    font-family: monospace;
+    white-space: pre;
+    margin: 2rem 0;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.hints {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: var(--bg-secondary);
+}
+
+.hints ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.hints li {
+    margin: 0.5rem 0;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.hints li::before {
+    content: '>';
+    margin-right: 0.5rem;
+    color: var(--accent-primary);
+}
+</style>
+
+<script>
+// Add console hint
+console.log('%cCurious about what lies in the void? Try enterTheVoid()', 'color: #b15eff; font-style: italic;');
+</script>
