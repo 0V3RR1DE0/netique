@@ -3,37 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} - netique.lol</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="/assets/css/easter-eggs.css">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
 </head>
-<body>
-    {% include navigation.html %}
-    
-    <div class="container">
+<body class="dark-theme">
+    <nav class="main-nav">
+        <div class="nav-content">
+            <a href="/" class="logo">{{ site.title }}</a>
+            <div class="nav-links">
+                <a href="/" {% if page.url == "/" %}class="active"{% endif %}>Home</a>
+                <a href="/projects" {% if page.url == "/projects" %}class="active"{% endif %}>Projects</a>
+                <a href="/connect" {% if page.url == "/connect" %}class="active"{% endif %}>Connect</a>
+                <a href="/about" {% if page.url == "/about" %}class="active"{% endif %}>About</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content">
         {{ content }}
-    </div>
+    </main>
 
-    <script src="/assets/js/background.js"></script>
-    <script src="/assets/js/features.js"></script>
+    <footer>
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
+    </footer>
+
     <script src="/assets/js/main.js"></script>
-
-    <!-- Hidden Portal Reference -->
-    <div style="display: none;" aria-hidden="true">
-        <!-- The cake is a lie -->
-        <!-- GLaDOS is watching -->
-    </div>
-
-    <!-- Hidden Matrix Reference -->
-    <div style="display: none;" aria-hidden="true">
-        <!-- Follow the white rabbit -->
-        <!-- Wake up, Neo... -->
-    </div>
-
-    <!-- Hidden Konami Code Hint -->
-    <div style="display: none;" aria-hidden="true">
-        <!-- ↑↑↓↓←→←→BA -->
-    </div>
+    <script src="/assets/js/easter-eggs.js"></script>
 </body>
 </html>

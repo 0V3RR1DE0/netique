@@ -1,0 +1,235 @@
+---
+layout: default
+title: Projects
+---
+
+<h1 class="section-title">Projects</h1>
+
+<div class="card">
+    <h2>GitHub Statistics</h2>
+    <div id="github-stats" class="github-stats">
+        <div class="loading-spinner"></div>
+    </div>
+</div>
+
+<div class="featured-projects">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+        <a href="https://eats.netique.lol" target="_blank" rel="noopener noreferrer" class="project-card card">
+            <div class="project-content">
+                <h3>eats.netique.lol</h3>
+                <p class="project-description">Food Scanner App</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Visit Website</span>
+                </div>
+            </div>
+        </a>
+        <a href="https://dnd.netique.lol" target="_blank" rel="noopener noreferrer" class="project-card card">
+            <div class="project-content">
+                <h3>dnd.netique.lol</h3>
+                <p class="project-description">D&D Math Calculator</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Visit Website</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="all-projects">
+    <h2 class="section-title">All Projects</h2>
+    <div id="repos-list" class="repos-grid">
+        <div class="loading-spinner"></div>
+    </div>
+</div>
+
+<style>
+.github-stats {
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--bg-secondary);
+    border-top: 4px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.projects-grid, .repos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.project-card {
+    display: block;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-content {
+    position: relative;
+    z-index: 1;
+}
+
+.project-card h3 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.project-description {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-tag {
+    background: var(--bg-primary);
+    color: var(--accent);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.repo-stats {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.repo-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .projects-grid, .repos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+// Update GitHub username
+const GITHUB_USERNAME = '0v3rr1de0';
+
+// Function to fetch and display all repositories
+async function fetchRepositories() {
+    try {
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
+        const repos = await response.json();
+        
+        const reposList = document.getElementById('repos-list');
+        reposList.innerHTML = '';
+
+        repos.forEach(repo => {
+            const card = document.createElement('div');
+            card.className = 'card project-card';
+            
+            let websiteLink = '';
+            if (repo.homepage) {
+                websiteLink = `
+                    <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="tech-tag">
+                        Visit Website
+                    </a>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="project-content">
+                    <h3>${repo.name}</h3>
+                    <p class="project-description">${repo.description || 'No description available'}</p>
+                    <div class="project-tech">
+                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="tech-tag">
+                            View on GitHub
+                        </a>
+                        ${websiteLink}
+                    </div>
+                    <div class="repo-stats">
+                        <span class="repo-stat">
+                            ⭐ ${repo.stargazers_count} stars
+                        </span>
+                        <span class="repo-stat">
+                            🔄 ${repo.forks_count} forks
+                        </span>
+                    </div>
+                </div>
+            `;
+            
+            reposList.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error fetching repositories:', error);
+        document.getElementById('repos-list').innerHTML = '<p>Error loading repositories</p>';
+    }
+}
+
+// Update the GitHub stats function to use the correct username
+async function fetchGitHubStats() {
+    try {
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+        const userData = await response.json();
+        
+        const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
+        const reposData = await reposResponse.json();
+
+        const totalStars = reposData.reduce((acc, repo) => acc + repo.stargazers_count, 0);
+        const totalForks = reposData.reduce((acc, repo) => acc + repo.forks_count, 0);
+
+        const statsContainer = document.getElementById('github-stats');
+        statsContainer.innerHTML = `
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Repositories</h3>
+                    <p>${userData.public_repos}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Stars</h3>
+                    <p>${totalStars}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Followers</h3>
+                    <p>${userData.followers}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Forks</h3>
+                    <p>${totalForks}</p>
+                </div>
+            </div>
+        `;
+    } catch (error) {
+        console.error('Error fetching GitHub stats:', error);
+        document.getElementById('github-stats').innerHTML = '<p>Error loading GitHub statistics</p>';
+    }
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    fetchGitHubStats();
+    fetchRepositories();
+});
+</script>

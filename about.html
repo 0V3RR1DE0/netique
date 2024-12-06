@@ -1,0 +1,149 @@
+---
+layout: default
+title: About
+---
+
+<h1 class="section-title">About Me</h1>
+
+<div class="card">
+    <h2>Who Am I?</h2>
+    <p>I'm a student studying ICT with a deep interest for AI and technology.</p>
+</div>
+
+<div class="card skills-section">
+    <h2>Interests & Skills</h2>
+    <p class="text-secondary">My focus areas include:</p>
+    
+    <ul class="skills-list">
+        <li>
+            <span class="skill-name">AI and Machine Learning</span>
+            <div class="skill-bar">
+                <div class="skill-progress"></div>
+            </div>
+        </li>
+        <li>
+            <span class="skill-name">Open Source Development</span>
+            <div class="skill-bar">
+                <div class="skill-progress"></div>
+            </div>
+        </li>
+        <li>
+            <span class="skill-name">Creative Programming</span>
+            <div class="skill-bar">
+                <div class="skill-progress"></div>
+            </div>
+        </li>
+        <li>
+            <span class="skill-name">CLI Tools</span>
+            <div class="skill-bar">
+                <div class="skill-progress"></div>
+            </div>
+        </li>
+        <li>
+            <span class="skill-name">Ethical Hacking & Pentesting</span>
+            <div class="skill-bar">
+                <div class="skill-progress"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>Easter Eggs & Secrets</h2>
+    <p class="text-secondary">This site contains several hidden features and easter eggs. Here are some hints:</p>
+    <ul class="hints-list">
+        <li>Try some classic gaming cheat codes...</li>
+        <li>Type certain words to trigger special effects...</li>
+        <li>Some buttons might do more than they appear...</li>
+    </ul>
+</div>
+
+<style>
+.skills-section {
+    margin: 40px 0;
+}
+
+.skills-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.skills-list li {
+    margin-bottom: 20px;
+}
+
+.skill-name {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.skill-bar {
+    height: 4px;
+    background: var(--bg-secondary);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-progress {
+    position: absolute;
+    height: 100%;
+    background: var(--accent);
+    width: 0;
+    animation: progress 1.5s ease-out forwards;
+}
+
+.skills-list li:nth-child(1) .skill-progress { --progress: 85%; }
+.skills-list li:nth-child(2) .skill-progress { --progress: 90%; }
+.skills-list li:nth-child(3) .skill-progress { --progress: 80%; }
+.skills-list li:nth-child(4) .skill-progress { --progress: 95%; }
+.skills-list li:nth-child(5) .skill-progress { --progress: 75%; }
+
+@keyframes progress {
+    from { width: 0; }
+    to { width: var(--progress); }
+}
+
+.hints-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.hints-list li {
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.hints-list li::before {
+    content: '→';
+    color: var(--accent);
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .skills-section {
+        margin: 20px 0;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Trigger skill bar animations when they come into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'progress 1.5s ease-out forwards';
+            }
+        });
+    });
+
+    document.querySelectorAll('.skill-progress').forEach(bar => {
+        observer.observe(bar);
+    });
+});
+</script>

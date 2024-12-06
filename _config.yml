@@ -1,41 +1,40 @@
-# Site settings
 title: netique.lol
-email: ""
+email: # coming soon
 description: >- 
-  Personal website of an ICT enthusiast and open source advocate. Featuring my studies,
-  projects, and explorations in information technology, cybersecurity, and networking,
-  all presented with a gothic-professional aesthetic.
-baseurl: "" # the subpath of your site
-url: "https://netique.lol" # your domain
+  A digital playground where technology meets creativity. 
+  Featuring projects, skills, and some hidden surprises.
+baseurl: ""
+url: "https://netique.lol"
 github_username: 0v3rr1de0
 
 # Build settings
-theme: minima
+markdown: kramdown
 plugins:
   - jekyll-feed
-
-# Custom settings
-navigation_tabs:
-  - title: Home
-    url: /
-  - title: GitHub
-    url: /github
-  - title: Links
-    url: /links
-  - title: About
-    url: /about
+  - jekyll-seo-tag
 
 # Theme settings
-dark_mode: true
-accent_color: "#6e2594"
+theme: null
+accent_color: "#ff1493" # Hot pink
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
 
 # Exclude files
 exclude:
-  - .sass-cache/
-  - .jekyll-cache/
-  - gemfiles/
   - Gemfile
   - Gemfile.lock
-  - node_modules/
-  - vendor/
-  - memlog/
+  - node_modules
+  - vendor
+  - memlog
+  - README.md
+  - LICENSE
+  - CNAME
+  - .sass-cache/
+  - .jekyll-cache/
+  - .jekyll-metadata
+  - .git/
+  - .gitignore

@@ -1,0 +1,110 @@
+---
+layout: default
+title: Connect
+---
+
+<h1 class="section-title">Connect</h1>
+
+<div class="card">
+    <h2>Social Links</h2>
+    <p class="text-secondary">Find me across the digital realm:</p>
+    
+    <div class="social-grid">
+        <a href="https://github.com/0v3rr1de0" target="_blank" rel="noopener noreferrer" class="social-card card">
+            <div class="social-content">
+                <h3>GitHub Profile</h3>
+                <p class="text-secondary">Check out my code and contributions</p>
+            </div>
+        </a>
+        
+        <div class="social-card card disabled">
+            <div class="social-content">
+                <h3>LinkedIn</h3>
+                <p class="text-secondary">Coming Soon</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card contact-section">
+    <h2>Contact</h2>
+    <p class="text-secondary">Interested in collaboration or just want to connect? Feel free to reach out.</p>
+    
+    <div class="contact-info">
+        <p class="text-secondary"><em>Email: (Coming Soon)</em></p>
+        <p class="text-secondary">Discord: kuusieppi</p>
+    </div>
+</div>
+
+<style>
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.social-card {
+    transition: transform 0.3s ease;
+}
+
+.social-card:not(.disabled) {
+    cursor: pointer;
+}
+
+.social-card:not(.disabled):hover {
+    transform: translateY(-5px);
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.disabled::after {
+    content: 'Coming Soon';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-primary);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.disabled:hover::after {
+    opacity: 1;
+}
+
+.social-content {
+    padding: 20px;
+}
+
+.social-content h3 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.contact-section {
+    margin-top: 40px;
+}
+
+.contact-info {
+    margin-top: 20px;
+}
+
+.contact-info p {
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
